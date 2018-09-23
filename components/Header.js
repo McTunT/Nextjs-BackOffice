@@ -7,7 +7,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import { mailFolderListItems, otherMailFolderListItems } from "./titledata";
+import {
+  mailFolderListItems,
+  otherMailFolderListItems
+} from "../components/titledata";
 
 const drawerWidth = 240;
 

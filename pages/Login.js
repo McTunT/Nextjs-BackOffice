@@ -14,7 +14,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 const styles = theme => ({
   layout: {
     width: "auto",
-    display: "block", // Fix IE11 issue.
+    display: "block",
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
@@ -36,7 +36,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE11 issue.
+    width: "100%",
     marginTop: theme.spacing.unit
   },
   submit: {
@@ -58,7 +58,7 @@ function SignIn(props) {
           <Typography variant="headline">Sign in</Typography>
           <form className={classes.form}>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Address</InputLabel>
+              <InputLabel htmlFor="email">User Name</InputLabel>
               <Input id="email" name="email" autoComplete="email" autoFocus />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
