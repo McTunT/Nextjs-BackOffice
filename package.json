@@ -23,6 +23,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-number-format": "^3.6.0",
     "react-select": "^2.0.0",
     "react-text-mask": "^5.4.3",
     "redux-form-material-ui": "^4.3.4",

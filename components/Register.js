@@ -5,10 +5,27 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import MaskedInput from "react-text-mask";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
+import Select from "react-select";
+import { BranchAusiris, groupedOptions } from "../docs/data1";
+import NumberFormat from "react-number-format";
+
+const groupStyles = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between"
+};
+const groupBadgeStyles = {
+  backgroundColor: "#EBECF0",
+  borderRadius: "2em",
+  color: "#172B4D",
+  display: "inline-block",
+  fontSize: 12,
+  fontWeight: "normal",
+  lineHeight: "1",
+  minWidth: 1,
+  padding: "0.16666666666667em 0.5em",
+  textAlign: "center"
+};
 
 const styles = theme => ({
   card: {
@@ -32,52 +49,46 @@ const styles = theme => ({
     width: 980,
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
-  },
-  idcard: {
-    width: 300,
-    marginLeft: 10,
-    marginBottom: 15
   }
 });
 
-const TextMaskCustom = props => {
-  const { inputRef, ...other } = props;
+const NumberFormatIdcard = props => {
+  const { inputRef, onChange, ...other } = props;
 
   return (
-    <MaskedInput
+    <NumberFormat
       {...other}
-      ref={inputRef}
-      mask={[
-        /\d/,
-        " ",
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/,
-        " ",
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/,
-        " ",
-        /\d/,
-        /\d/,
-        " ",
-        /\d/
-      ]}
-      placeholderChar={"\u2000"}
+      format="# #### ##### ## #"
+      getInputRef={inputRef}
+      onValueChange={values => {
+        onChange({
+          target: {
+            value: values.value
+          }
+        });
+      }}
     />
   );
 };
-TextMaskCustom.propTypes = {
-  inputRef: PropTypes.func.isRequired
+
+NumberFormatIdcard.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
-class Customerdata extends Component {
+const formatGroupLabel = data => (
+  <div style={groupStyles}>
+    <span>{data.label}</span>
+    <span style={groupBadgeStyles}>{data.options.length}</span>
+  </div>
+);
+
+class Register extends Component {
   state = {
     textmask: "",
-    name: "Hello Next.js!"
+    name: "Hello Next.js!",
+    single: "null",
+    numberformat: "null"
   };
 
   handleChange = name => event => {
@@ -86,30 +97,53 @@ class Customerdata extends Component {
     });
   };
 
+  handleChangeSelect = name => value => {
+    this.setState({
+      [name]: value
+    });
+  };
+
   render() {
     const { classes } = this.props;
-    const { textmask } = this.state;
+    const { numberformat } = this.state;
 
     return (
       <Card className={classes.card}>
         <Typography gutterBottom variant="headline" component="h2">
           ข้อมูลลูกค้า
         </Typography>
-        <FormControl className={classes.idcard}>
-          <InputLabel htmlFor="Idcard">เลขที่บัตรประชาชน</InputLabel>
-          <Input
-            value={textmask}
-            onChange={this.handleChange("textmask")}
-            id="Idcard"
-            inputComponent={TextMaskCustom}
-            variant="outlined"
-          />
-        </FormControl>
         <Grid container spacing={24}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              className={classes.textField}
+              label="บัตรประชาชน"
+              onChange={this.handleChange("numberformat")}
+              id="Idcard"
+              InputProps={{
+                inputComponent: NumberFormatIdcard
+              }}
+            />
+          </Grid>
+
+          {/* พื้นหลัง Select มองทะลุเห็น Label ของ TextField*/}
+          <Grid item xs={12} sm={6}>
+            <Select
+              className={classes.textField}
+              defaultValue={BranchAusiris[1]}
+              options={groupedOptions}
+              formatGroupLabel={formatGroupLabel}
+              isClearable
+              isSearchable
+              name="Branch"
+              onChange={this.handleChangeSelect("single")}
+              variant="standard"
+            />
+          </Grid>
           <Grid item xs={6} sm={6}>
             <TextField
-              id="outlined-name"
-              label="Name"
+              id="name_thai"
+              label="ชื่อไทย"
               value={this.state.name}
               onBlur={this.handleChange}
               onChange={this.handleChange("name")}
@@ -133,7 +167,6 @@ class Customerdata extends Component {
               label="วันเกิด"
               variant="outlined"
               type="date"
-              defaultValue="2017-05-24"
               className={classes.datetime}
               InputLabelProps={{
                 shrink: true
@@ -146,7 +179,6 @@ class Customerdata extends Component {
               label="วันออกบัตร"
               variant="outlined"
               type="date"
-              defaultValue="2017-05-24"
               className={classes.datetime}
               InputLabelProps={{
                 shrink: true
@@ -159,16 +191,31 @@ class Customerdata extends Component {
               label="วันออกบัตร"
               variant="outlined"
               type="date"
-              defaultValue="2017-05-24"
               className={classes.datetime}
               InputLabelProps={{
                 shrink: true
               }}
             />
           </Grid>
-          <Grid item xs={6} sm={6}>
+
+          <Grid item xs={12} sm={6}>
             <TextField
-              id="outlined-email-input"
+              id="phone_number"
+              label="Numberphone"
+              value={this.state.age}
+              onChange={this.handleChange("age")}
+              type="number"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true
+              }}
+              margin="normal"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="email"
               label="Email"
               className={classes.textField}
               type="email"
@@ -197,8 +244,8 @@ class Customerdata extends Component {
     );
   }
 }
-Customerdata.propTypes = {
+Register.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Customerdata);
+export default withStyles(styles)(Register);
