@@ -1,3 +1,0 @@
-{
-  "extends": ["Nextjs", "plugin:prettier/recommended"]
-}
