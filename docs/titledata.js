@@ -5,7 +5,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
-export const mailFolderListItems = (
+export const Dashboard = (
   <div>
     <ListItem button>
       <ListItemIcon>

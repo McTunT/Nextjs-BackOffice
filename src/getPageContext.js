@@ -5,15 +5,15 @@ import {
   createMuiTheme,
   createGenerateClassName
 } from "@material-ui/core/styles";
-import purple from "@material-ui/core/colors/purple";
 import green from "@material-ui/core/colors/green";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: purple[300],
-      main: purple[500],
-      dark: purple[700]
+      light: "#002984",
+      main: "#002984",
+      dark: "#3F50B5",
+      contrastText: "#fff"
     },
     secondary: {
       light: green[300],
