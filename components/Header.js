@@ -16,6 +16,7 @@ import Button from "@material-ui/core/Button";
 import { Dashboard } from "../docs/titledata";
 import styled from "styled-components";
 import Register from "./Register";
+import Registercs from "./Registercs";
 
 const NextBody = styled.body`
   margin: auto;
@@ -89,7 +90,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
-      width: 1200,
+      width: 1100,
       marginLeft: "auto",
       marginRight: "auto"
     }
@@ -144,7 +145,9 @@ class MiniDrawer extends React.Component {
                 Next Back
               </Typography>
 
-              <Button color="inherit">Log Out</Button>
+              <Button color="inherit" variant="Outlined">
+                Log Out
+              </Button>
             </Toolbar>
           </AppBar>
           <Drawer
@@ -172,6 +175,7 @@ class MiniDrawer extends React.Component {
           <main className={classes.layout}>
             <div className={classes.toolbar} />
             <Register />
+            <Registercs />
           </main>
         </div>
       </React.Fragment>

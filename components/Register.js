@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { Paper, Typography, Grid, TextField } from "@material-ui/core";
 import Select from "react-select";
-import { BranchAusiris, groupedOptions } from "../docs/data1";
+import { BranchAusiris, groupedOptions } from "../docs/data";
 import NumberFormat from "react-number-format";
-import Registercs from "./Registercs";
 
 const groupStyles = {
   display: "flex",
@@ -36,7 +35,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
       marginTop: theme.spacing.unit * 6,
-      marginBottom: theme.spacing.unit * 6,
+      marginBottom: "auto",
       padding: theme.spacing.unit * 3
     }
   }
@@ -75,10 +74,10 @@ const formatGroupLabel = data => (
 
 class Register extends Component {
   state = {
-    textmask: "",
-    name: "",
-    single: "null",
-    numberformat: "null"
+    name: " ",
+    single: " ",
+    numberformat: " ",
+    phone: " "
   };
 
   handleChange = name => event => {
@@ -109,7 +108,7 @@ class Register extends Component {
               ข้อมูลลูกค้า
             </Typography>
             <Grid container spacing={24}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   label="บัตรประชาชน"
                   onChange={this.handleChange("numberformat")}
@@ -123,9 +122,9 @@ class Register extends Component {
               </Grid>
 
               {/* พื้นหลังของ React-Select มองทะลุเห็น Label ของ TextField Material-ui 3.1.1, downshift,react-autosugest เป็นเหมือนกัน*/}
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <Select
-                  defaultValue={BranchAusiris[1]}
+                  defaultValue={BranchAusiris[0]}
                   options={groupedOptions}
                   formatGroupLabel={formatGroupLabel}
                   isClearable
@@ -134,13 +133,13 @@ class Register extends Component {
                   onChange={this.handleChangeSelect("single")}
                   variant="filled"
                   fullWidth
+                  margin="normal"
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={6} md={6}>
                 <TextField
                   id="name_thai"
                   label="ชื่อไทย"
-                  value={this.state.name}
                   onBlur={this.handleChange}
                   onChange={this.handleChange("name")}
                   margin="normal"
@@ -148,7 +147,7 @@ class Register extends Component {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={6} md={6}>
                 <TextField
                   id="name_eng"
                   label="ชื่ออังกฤษ"
@@ -157,7 +156,7 @@ class Register extends Component {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={6} sm={4}>
+              <Grid item xs={6} md={4}>
                 <TextField
                   id="birthday"
                   label="วันเกิด"
@@ -167,9 +166,10 @@ class Register extends Component {
                   }}
                   variant="filled"
                   fullWidth
+                  margin="normal"
                 />
               </Grid>
-              <Grid item xs={6} sm={4}>
+              <Grid item xs={6} md={4}>
                 <TextField
                   id="Cardissue"
                   label="วันออกบัตร"
@@ -179,9 +179,10 @@ class Register extends Component {
                   }}
                   variant="filled"
                   fullWidth
+                  margin="normal"
                 />
               </Grid>
-              <Grid item xs={6} sm={4}>
+              <Grid item xs={6} md={4}>
                 <TextField
                   id="Cardexpiration"
                   label="วันออกบัตร"
@@ -191,15 +192,16 @@ class Register extends Component {
                   }}
                   variant="filled"
                   fullWidth
+                  margin="normal"
                 />
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   id="phone_number"
                   label="Numberphone"
                   value={this.state.age}
-                  onChange={this.handleChange("age")}
+                  onChange={this.handleChange("phone")}
                   type="number"
                   InputLabelProps={{
                     shrink: true
@@ -209,7 +211,7 @@ class Register extends Component {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   id="email"
                   label="Email"
@@ -221,11 +223,10 @@ class Register extends Component {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item md={12}>
                 <TextField
                   id="address"
                   label="ที่อยู่"
-                  style={{ margin: 8 }}
                   fullWidth
                   margin="normal"
                   variant="outlined"
@@ -239,7 +240,6 @@ class Register extends Component {
             </Grid>
           </Paper>
         </form>
-        <Registercs />
       </React.Fragment>
     );
   }
