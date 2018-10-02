@@ -2,21 +2,31 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import Button from "@material-ui/core/Button";
-import { Dashboard } from "../docs/titledata";
+import {
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  MenuIcon,
+  Button,
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from "@material-ui/core";
+import {
+  MenuIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DashboardIcon,
+  AccountBoxIcon
+} from "@material-ui/icons";
 import styled from "styled-components";
-import Register from "./Register";
-import Registercs from "./Registercs";
+import CustomerInfo from "./CustomerInfo";
+import Product from "./Product";
+import Router from "next/router";
 
 const NextBody = styled.body`
   margin: auto;
@@ -90,7 +100,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
-      width: 1100,
+      width: 1000,
       marginLeft: "auto",
       marginRight: "auto"
     }
@@ -170,12 +180,27 @@ class MiniDrawer extends React.Component {
               </IconButton>
             </div>
             <Divider />
-            <List>{Dashboard}</List>
+            <List>
+              <div>
+                <ListItem button onClick={() => Router.push("/")}>
+                  <ListItemIcon>
+                    <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Dashboard" />
+                </ListItem>
+                <ListItem button onClick={() => Router.push("/about")}>
+                  <ListItemIcon>
+                    <AccountBoxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Customer" />
+                </ListItem>
+              </div>
+            </List>
           </Drawer>
           <main className={classes.layout}>
             <div className={classes.toolbar} />
-            <Register />
-            <Registercs />
+            <CustomerInfo />
+            <Product />
           </main>
         </div>
       </React.Fragment>

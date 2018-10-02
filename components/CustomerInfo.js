@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { Paper, Typography, Grid, TextField } from "@material-ui/core";
-import Select from "react-select";
-import { BranchAusiris, groupedOptions } from "../docs/data";
 import NumberFormat from "react-number-format";
+import Selectbranch from "./Selectbranch";
 
 const groupStyles = {
   display: "flex",
@@ -72,7 +71,7 @@ const formatGroupLabel = data => (
   </div>
 );
 
-class Register extends Component {
+class CustomerInfo extends Component {
   state = {
     name: " ",
     single: " ",
@@ -116,35 +115,26 @@ class Register extends Component {
                   InputProps={{
                     inputComponent: NumberFormatIdcard
                   }}
-                  variant="filled"
-                  fullWidth
-                />
-              </Grid>
-
-              {/* พื้นหลังของ React-Select มองทะลุเห็น Label ของ TextField Material-ui 3.1.1, downshift,react-autosugest เป็นเหมือนกัน*/}
-              <Grid item xs={12} md={6}>
-                <Select
-                  defaultValue={BranchAusiris[0]}
-                  options={groupedOptions}
-                  formatGroupLabel={formatGroupLabel}
-                  isClearable
-                  isSearchable
-                  name="Branch"
-                  onChange={this.handleChangeSelect("single")}
-                  variant="filled"
                   fullWidth
                   margin="normal"
+                  InputLabelProps={{
+                    shrink: true
+                  }}
                 />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Selectbranch />
               </Grid>
               <Grid item xs={6} md={6}>
                 <TextField
                   id="name_thai"
                   label="ชื่อไทย"
-                  onBlur={this.handleChange}
                   onChange={this.handleChange("name")}
                   margin="normal"
-                  variant="filled"
                   fullWidth
+                  InputLabelProps={{
+                    shrink: true
+                  }}
                 />
               </Grid>
               <Grid item xs={6} md={6}>
@@ -152,8 +142,10 @@ class Register extends Component {
                   id="name_eng"
                   label="ชื่ออังกฤษ"
                   margin="normal"
-                  variant="filled"
                   fullWidth
+                  InputLabelProps={{
+                    shrink: true
+                  }}
                 />
               </Grid>
               <Grid item xs={6} md={4}>
@@ -164,7 +156,6 @@ class Register extends Component {
                   InputLabelProps={{
                     shrink: true
                   }}
-                  variant="filled"
                   fullWidth
                   margin="normal"
                 />
@@ -177,7 +168,6 @@ class Register extends Component {
                   InputLabelProps={{
                     shrink: true
                   }}
-                  variant="filled"
                   fullWidth
                   margin="normal"
                 />
@@ -190,7 +180,6 @@ class Register extends Component {
                   InputLabelProps={{
                     shrink: true
                   }}
-                  variant="filled"
                   fullWidth
                   margin="normal"
                 />
@@ -199,7 +188,7 @@ class Register extends Component {
               <Grid item xs={12} md={6}>
                 <TextField
                   id="phone_number"
-                  label="Numberphone"
+                  label="เบอร์โทรศัพท์"
                   value={this.state.age}
                   onChange={this.handleChange("phone")}
                   type="number"
@@ -207,7 +196,6 @@ class Register extends Component {
                     shrink: true
                   }}
                   margin="normal"
-                  variant="filled"
                   fullWidth
                 />
               </Grid>
@@ -219,22 +207,21 @@ class Register extends Component {
                   name="email"
                   autoComplete="email"
                   margin="normal"
-                  variant="filled"
                   fullWidth
+                  InputLabelProps={{
+                    shrink: true
+                  }}
                 />
               </Grid>
-              <Grid item md={12}>
+              <Grid item xs={12}>
                 <TextField
                   id="address"
                   label="ที่อยู่"
                   fullWidth
                   margin="normal"
-                  variant="outlined"
                   InputLabelProps={{
                     shrink: true
                   }}
-                  variant="filled"
-                  fullWidth
                 />
               </Grid>
             </Grid>
@@ -244,8 +231,8 @@ class Register extends Component {
     );
   }
 }
-Register.propTypes = {
+CustomerInfo.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Register);
+export default withStyles(styles)(CustomerInfo);

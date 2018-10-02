@@ -1,9 +1,12 @@
-import Register from "../components/Register";
-
-const Index = () => (
+import CustomerInfo from "../components/CustomerInfo";
+import Product from "../components/Product";
+import Finance from "../components/Finance";
+const about = () => (
   <div>
-    <Register />
+    <Product />
+    <CustomerInfo />
+    <Finance />
   </div>
 );
 
-export default Index;
+export default about;
